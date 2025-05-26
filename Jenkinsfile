@@ -1,13 +1,11 @@
 pipeline {
-    agent { docker { image 'maven:3.9.9-eclipse-temurin-21-alpine' } }
+    agent {
+        docker { image 'node:22.16.0-alpine3.21' }
+    }
     stages {
-        stage('build') {
+        stage('Test') {
             steps {
-                sh 'echo "Hello World"'
-                sh '''
-                    echo "Multiline shell steps works too"
-                    ls -lah
-                '''
+                sh 'node --eval "console.log(process.arch,process.platform)"'
             }
         }
     }
